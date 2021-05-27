@@ -1,0 +1,33 @@
+(kicad_sch (version 20210406) (generator eeschema)
+
+  (uuid 53078d2b-6e95-425c-bc5e-0469a765fc84)
+
+  (paper "A4")
+
+  (title_block
+    (title "Common Slot to ATX Adapter")
+    (rev "1")
+  )
+
+  (lib_symbols
+  )
+
+
+
+  (hierarchical_label "pmbus{SCL SDA}" (shape bidirectional) (at 43.18 34.29 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid c6e1d70d-de3e-4a66-be32-2f14a0c1069e)
+  )
+  (hierarchical_label "~SMB_ALERT" (shape input) (at 43.18 38.1 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 274b4266-da1c-4f75-8aae-70b244fef9cd)
+  )
+  (hierarchical_label "GND" (shape passive) (at 43.18 45.72 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 15ced68e-136c-4ecd-a2ed-155af02c2913)
+  )
+  (hierarchical_label "aux_io{LED_{1} LED_{2} BTN_{1} BTN_{2}}" (shape bidirectional) (at 43.18 49.53 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 9bcdb46d-10b5-4b73-91b9-9e2e6d61f5dd)
+  )
+)
