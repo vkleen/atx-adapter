@@ -1,3 +1,4 @@
 (sym_lib_table
   (lib (name "proj_sym")(type "KiCad")(uri "${KIPRJMOD}/proj_sym.kicad_sym")(options "")(descr ""))
+  (lib (name "lib_sch")(type "KiCad")(uri "/home/vkleen/hw/relays2/lib_sch.kicad_sym")(options "")(descr ""))
 )

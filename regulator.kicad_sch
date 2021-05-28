@@ -175,7 +175,6 @@
   )
 
 
-
   (hierarchical_label "12V_{cs}" (shape input) (at 25.4 19.05 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid 5f77135f-e431-40b2-a627-485d24a8a779)
