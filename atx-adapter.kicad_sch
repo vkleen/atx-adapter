@@ -647,7 +647,7 @@
     (effects (font (size 1.27 1.27)) (justify right bottom))
     (uuid b6f933f2-3b6f-47ee-8c4c-ece4b6097ae2)
   )
-  (label "3.3V_{AUX}" (at 109.22 96.52 180)
+  (label "3.3V_{aux}" (at 109.22 96.52 180)
     (effects (font (size 1.27 1.27)) (justify right bottom))
     (uuid f47d8107-f3e6-4dfc-a39e-cee849740a47)
   )
@@ -1391,9 +1391,9 @@
       (effects (font (size 1.27 1.27)) (justify right))
       (uuid 9f46a74c-aa77-476c-8dd7-d4752cb5d242)
     )
-    (pin "3.3V_{AUX}" input (at 88.9 96.52 0)
+    (pin "3.3V_{aux}" input (at 88.9 96.52 0)
       (effects (font (size 1.27 1.27)) (justify right))
-      (uuid ce7e151e-665d-4337-8ee8-ceef4b45c2fb)
+      (uuid 307c27ef-b9f1-433e-9c16-245cf71f96df)
     )
   )
 
@@ -1672,6 +1672,42 @@
     (path "/72ab637e-73d9-486d-888e-3c2c6270d9a8/bc72db2b-9f5f-4ba6-8232-ff8f0707c04e/bf36c2a1-1c54-472f-b11c-84a61bd3ddae"
       (reference "R1201") (unit 1) (value "100k") (footprint "")
     )
+    (path "/ca64c4b8-5526-412c-b79b-5b6fc95e3044/6b13a45c-2e12-4db7-a179-d1354d3e1bdd"
+      (reference "R?") (unit 1) (value "20k") (footprint "")
+    )
+    (path "/ca64c4b8-5526-412c-b79b-5b6fc95e3044/8a622ab9-e00a-44fe-8fc6-b49fda12ae18"
+      (reference "R?") (unit 1) (value "41k2") (footprint "")
+    )
+    (path "/ca64c4b8-5526-412c-b79b-5b6fc95e3044/c46195be-1b47-4e8d-bf50-2a45130f966f"
+      (reference "R?") (unit 1) (value "10k") (footprint "")
+    )
+    (path "/ca64c4b8-5526-412c-b79b-5b6fc95e3044/cd57e2d6-bb75-4703-940c-f2ff2fedc93b"
+      (reference "R?") (unit 1) (value "11k5") (footprint "")
+    )
+    (path "/ca64c4b8-5526-412c-b79b-5b6fc95e3044/9aca8fd9-1ab3-4cb4-9dfe-b6280a4d2849"
+      (reference "RN201") (unit 1) (value "10k") (footprint "")
+    )
+    (path "/ca64c4b8-5526-412c-b79b-5b6fc95e3044/71b82f8a-886e-4c8e-8153-265057be7102"
+      (reference "RN201") (unit 2) (value "10k") (footprint "")
+    )
+    (path "/ca64c4b8-5526-412c-b79b-5b6fc95e3044/ba81cd1f-5209-4d85-88ec-b0730db96573"
+      (reference "RN201") (unit 3) (value "10k") (footprint "")
+    )
+    (path "/ca64c4b8-5526-412c-b79b-5b6fc95e3044/5d52cf3a-61a1-43b0-b490-991660d47682"
+      (reference "RN201") (unit 4) (value "10k") (footprint "")
+    )
+    (path "/ca64c4b8-5526-412c-b79b-5b6fc95e3044/b15e7a0a-02a8-478d-bb1d-3cfdada4993b"
+      (reference "RN202") (unit 1) (value "10k") (footprint "")
+    )
+    (path "/ca64c4b8-5526-412c-b79b-5b6fc95e3044/7a6d4af4-49e8-4d2c-85ab-1c410bec1965"
+      (reference "RN202") (unit 2) (value "10k") (footprint "")
+    )
+    (path "/ca64c4b8-5526-412c-b79b-5b6fc95e3044/b06cc49f-1423-4ba6-93ac-eb53744a49c5"
+      (reference "RN202") (unit 3) (value "10k") (footprint "")
+    )
+    (path "/ca64c4b8-5526-412c-b79b-5b6fc95e3044/1e1ff48e-7b38-4bd3-a942-0ca9101867ce"
+      (reference "RN202") (unit 4) (value "10k") (footprint "")
+    )
     (path "/d88ec964-55e1-4732-98a1-1ae5dd79106c/d0eaa29c-4e92-4369-9455-9d6498b6befe"
       (reference "T301") (unit 1) (value "HX6062NL") (footprint "")
     )
@@ -1683,6 +1719,27 @@
     )
     (path "/d88ec964-55e1-4732-98a1-1ae5dd79106c/ac2fcdba-b29d-481e-959d-18b651aa84d9"
       (reference "T301") (unit 4) (value "HX6062NL") (footprint "")
+    )
+    (path "/ca64c4b8-5526-412c-b79b-5b6fc95e3044/7db0a8e8-3c69-4a64-a7ee-35179c7bae3a"
+      (reference "U201") (unit 1) (value "ICE40HX8K-BG121") (footprint "Package_BGA:BGA-121_9.0x9.0mm_Layout11x11_P0.8mm_Ball0.4mm_Pad0.35mm_NSMD")
+    )
+    (path "/ca64c4b8-5526-412c-b79b-5b6fc95e3044/c7b70689-4365-4151-a862-c4d8a442b3be"
+      (reference "U201") (unit 2) (value "ICE40HX8K-BG121") (footprint "Package_BGA:BGA-121_9.0x9.0mm_Layout11x11_P0.8mm_Ball0.4mm_Pad0.35mm_NSMD")
+    )
+    (path "/ca64c4b8-5526-412c-b79b-5b6fc95e3044/1e1b329e-7034-4951-a8b6-e5f0e76b552e"
+      (reference "U201") (unit 3) (value "ICE40HX8K-BG121") (footprint "Package_BGA:BGA-121_9.0x9.0mm_Layout11x11_P0.8mm_Ball0.4mm_Pad0.35mm_NSMD")
+    )
+    (path "/ca64c4b8-5526-412c-b79b-5b6fc95e3044/ead21deb-0eb3-4bec-9b87-cf057d30a19d"
+      (reference "U201") (unit 4) (value "ICE40HX8K-BG121") (footprint "Package_BGA:BGA-121_9.0x9.0mm_Layout11x11_P0.8mm_Ball0.4mm_Pad0.35mm_NSMD")
+    )
+    (path "/ca64c4b8-5526-412c-b79b-5b6fc95e3044/4922bc92-b92f-47a9-8454-6042c1580859"
+      (reference "U201") (unit 5) (value "ICE40HX8K-BG121") (footprint "Package_BGA:BGA-121_9.0x9.0mm_Layout11x11_P0.8mm_Ball0.4mm_Pad0.35mm_NSMD")
+    )
+    (path "/ca64c4b8-5526-412c-b79b-5b6fc95e3044/ab1e45e0-2655-40cd-bcf8-94d4fabc4371"
+      (reference "U202") (unit 1) (value "TMUX1104") (footprint "")
+    )
+    (path "/ca64c4b8-5526-412c-b79b-5b6fc95e3044/78d25d96-6dac-4e26-a19a-bfffc4e089c2"
+      (reference "U203") (unit 1) (value "SLG46621") (footprint "")
     )
     (path "/d88ec964-55e1-4732-98a1-1ae5dd79106c/866280ba-ce33-4925-b72c-4502bd6f46d4"
       (reference "U301") (unit 1) (value "LTC2855") (footprint "")
@@ -1710,21 +1767,6 @@
     )
     (path "/72ab637e-73d9-486d-888e-3c2c6270d9a8/fe1a7ea6-291d-47c4-9489-cbe0d1c0cfae/350d9348-cc2d-47d6-be92-59c0bdd25c64"
       (reference "U1301") (unit 1) (value "MPM3811") (footprint "")
-    )
-    (path "/ca64c4b8-5526-412c-b79b-5b6fc95e3044/7db0a8e8-3c69-4a64-a7ee-35179c7bae3a"
-      (reference "U?") (unit 1) (value "ICE40HX8K-BG121") (footprint "Package_BGA:BGA-121_9.0x9.0mm_Layout11x11_P0.8mm_Ball0.4mm_Pad0.35mm_NSMD")
-    )
-    (path "/ca64c4b8-5526-412c-b79b-5b6fc95e3044/c7b70689-4365-4151-a862-c4d8a442b3be"
-      (reference "U?") (unit 2) (value "ICE40HX8K-BG121") (footprint "Package_BGA:BGA-121_9.0x9.0mm_Layout11x11_P0.8mm_Ball0.4mm_Pad0.35mm_NSMD")
-    )
-    (path "/ca64c4b8-5526-412c-b79b-5b6fc95e3044/1e1b329e-7034-4951-a8b6-e5f0e76b552e"
-      (reference "U?") (unit 3) (value "ICE40HX8K-BG121") (footprint "Package_BGA:BGA-121_9.0x9.0mm_Layout11x11_P0.8mm_Ball0.4mm_Pad0.35mm_NSMD")
-    )
-    (path "/ca64c4b8-5526-412c-b79b-5b6fc95e3044/ead21deb-0eb3-4bec-9b87-cf057d30a19d"
-      (reference "U?") (unit 4) (value "ICE40HX8K-BG121") (footprint "Package_BGA:BGA-121_9.0x9.0mm_Layout11x11_P0.8mm_Ball0.4mm_Pad0.35mm_NSMD")
-    )
-    (path "/ca64c4b8-5526-412c-b79b-5b6fc95e3044/4922bc92-b92f-47a9-8454-6042c1580859"
-      (reference "U?") (unit 5) (value "ICE40HX8K-BG121") (footprint "Package_BGA:BGA-121_9.0x9.0mm_Layout11x11_P0.8mm_Ball0.4mm_Pad0.35mm_NSMD")
     )
   )
 )
