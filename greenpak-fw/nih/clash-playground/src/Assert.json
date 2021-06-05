@@ -1,0 +1,49 @@
+[
+  { "BlackBox"    :
+    { "name"      : "Assert.assumeProperty"
+    , "templateD" : "// assumeProperty begin
+`ifdef FORMAL
+  assume property (~ARG[0]);
+`endif
+assign ~RESULT = ~ARG[1];
+// assumeProperty end"
+    }
+  },
+  { "BlackBox"    :
+    { "name"      : "Assert.assertProperty"
+    , "templateD" : "// assertProperty begin
+`ifdef FORMAL
+  assert property (~ARG[0]);
+`endif
+assign ~RESULT = ~ARG[1];
+// assertProperty end"
+    }
+  },
+
+  { "BlackBox"    :
+    { "name"      : "Assert.|->"
+    , "templateE" : "(~ARG[0] |-> ~ARG[1])"
+    }
+  },
+
+  { "BlackBox"    :
+    { "name"      : "Assert.initialAssume"
+    , "templateD" : "// initialAssume begin
+`ifdef FORMAL
+  initial assume (~ARG[0]);
+`endif
+assign ~RESULT = ~ARG[1];
+// initialAssume end"
+    }
+  },
+  { "BlackBox"    :
+    { "name"      : "Assert.initialAssert"
+    , "templateD" : "// initialAssert begin
+`ifdef FORMAL
+  initial assert (~ARG[0]);
+`endif
+assign ~RESULT = ~ARG[1];
+// initialAssert end"
+    }
+  }
+]

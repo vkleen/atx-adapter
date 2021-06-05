@@ -1,0 +1,16 @@
+[options]
+mode prove
+depth 17
+wait on
+
+[engines]
+smtbmc z3
+smtbmc yices
+smtbmc boolector
+
+[script]
+read_verilog -formal counter.v
+prep -top counter
+
+[files]
+verilog/Counter/counter/counter.v
