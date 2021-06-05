@@ -3,11 +3,12 @@
 `define ICE_CONF 2'b10
 `define ICE_GOOD 2'b11
 
-typedef enum bit[1:0] { RESET = `RESET, POWER_ON = `POWER_ON, ICE_CONF = `ICE_CONF } COMMAND;
+typedef enum bit[1:0] { RESET = `RESET, POWER_ON = `POWER_ON, ICE_CONF = `ICE_CONF, ICE_GOOD_FORCE = `ICE_GOOD } COMMAND;
 
 module command_detector ( input logic sdi,
                           input logic sclk,
-                          output logic shift
+                          output logic shift,
+                          output logic done
                         );
   typedef enum bit[2:0] { IDLE = 0, S0, S01, S010, S0101, S01011, CMD0, CMD1 } STATE;
 
@@ -20,31 +21,31 @@ module command_detector ( input logic sdi,
   always_comb begin
     casez({cur_state, sdi})
       {IDLE,     1'b0}: begin
-        next_state = S0;      shift = 0;
+        next_state = S0;      shift = 0; done = 0;
       end
       {S0,       1'b1}: begin
-        next_state = S01;     shift = 0;
+        next_state = S01;     shift = 0; done = 0;
       end
       {S01,      1'b0}: begin
-        next_state = S010;    shift = 0;
+        next_state = S010;    shift = 0; done = 0;
       end
       {S010,     1'b1}: begin
-        next_state = S0101;   shift = 0;
+        next_state = S0101;   shift = 0; done = 0;
       end
       {S0101,    1'b1}: begin
-        next_state = S01011;  shift = 0;
+        next_state = S01011;  shift = 0; done = 0;
       end
       {S01011,   1'b0}: begin
-        next_state = CMD0;    shift = 0;
+        next_state = CMD0;    shift = 0; done = 0;
       end
       {CMD0,     1'b?}: begin
-        next_state = CMD1;    shift = 1;
+        next_state = CMD1;    shift = 1; done = 0;
       end
       {CMD1,     1'b?}: begin
-        next_state = IDLE;    shift = 1;
+        next_state = IDLE;    shift = 1; done = 1;
       end
       default: begin
-        next_state = IDLE; shift = 0;
+        next_state = IDLE; shift = 0; done = 0;
       end
     endcase
   end
@@ -63,26 +64,25 @@ module atx_control ( input n_atx_on,
                      output reg n_cs_en,
                      output reg wdog_inhibit,
                      output reg sdo_enable
-
                    );
   always_comb begin
     main_en = cs_pgood & ~n_cs_en;
     n_cs_en = n_atx_on;
   end
 
-  reg spi_in_gate, spi_out_gate;
+  reg spi_in_gate;
   logic gated_sdi, gated_sclk;
 
   always_comb begin
     gated_sclk = spi_in_gate ? sclk : 1'b0;
     gated_sdi = spi_in_gate ? sdi : 1'b0;
-    sdo_enable = spi_out_gate ? ice_cdone : 1'b1;
   end
 
   logic shift;
+  logic done;
   logic[1:0] state;
   logic[1:0] cmd;
-  command_detector detector( .sdi(gated_sdi), .sclk(gated_sclk), .shift(shift));
+  command_detector detector( .sdi(gated_sdi), .sclk(gated_sclk), .shift(shift), .done(done));
 
 `ifndef SYNTHESIS
   function string cmd_name(bit[1:0] i);
@@ -90,6 +90,7 @@ module atx_control ( input n_atx_on,
       `RESET: return "RESET";
       `POWER_ON: return "POWER_ON";
       `ICE_CONF: return "ICE_CONF";
+      `ICE_GOOD: return "ICE_GOOD_FORCE";
     endcase
   endfunction
 
@@ -98,12 +99,11 @@ module atx_control ( input n_atx_on,
   end
 `endif
 
-  logic last_shift;
   always @(posedge sclk) begin
     if(shift) begin
       cmd = {cmd[0], sdi};
     end
-    if (last_shift && !shift) begin
+    if (done) begin
       state = cmd;
       `ifndef SYNTHESIS
         $display("Command received: %s", cmd_name(cmd));
@@ -111,8 +111,6 @@ module atx_control ( input n_atx_on,
     end
     else if (ice_cdone && state === ICE_CONF)
       state = `ICE_GOOD;
-
-    last_shift = shift;
   end
 
 `ifndef SYNTHESIS
@@ -128,28 +126,28 @@ module atx_control ( input n_atx_on,
         ice_power = 0;
         wdog_inhibit = 1;
         spi_in_gate = 1;
-        spi_out_gate = 1;
+        sdo_enable = 1;
       end
       `POWER_ON: begin
         n_ice_reset = 0;
         ice_power = 1;
         wdog_inhibit = 1;
         spi_in_gate = 1;
-        spi_out_gate = 1;
+        sdo_enable = 1;
       end
       `ICE_CONF: begin
         n_ice_reset = 1;
         ice_power = 1;
         wdog_inhibit = 1;
         spi_in_gate = 0;
-        spi_out_gate = 1;
+        sdo_enable = 1;
       end
       `ICE_GOOD: begin
         n_ice_reset = 1;
         ice_power = 1;
         wdog_inhibit = 0;
         spi_in_gate = 0;
-        spi_out_gate = 0;
+        sdo_enable = 0;
       end
     endcase
   end
@@ -199,7 +197,7 @@ module test;
       sdi = $random;
       #50 sclk = ~sclk;
     end
-    #50 sclk = 1; sdi = 1;
+    sclk = 1; sdi = 1;
   endtask
 
   task send_ones(int n);
@@ -208,7 +206,7 @@ module test;
       sdi = 1;
       #50 sclk = ~sclk;
     end
-    #50 sclk = 1; sdi = 1;
+    sclk = 1; sdi = 1;
   endtask
 
   initial begin
@@ -226,11 +224,23 @@ module test;
 
     send_command(RESET);
     send_command(POWER_ON);
+    send_junk(32);
     send_command(RESET);
     send_command(POWER_ON);
     send_command(ICE_CONF);
     send_junk(32);
     send_command(RESET);
+    #100 wdog_timeout = 1;
+    #100 wdog_timeout = 0;
+
+    send_command(POWER_ON);
+    send_command(ICE_CONF);
+    send_junk(32);
+    #100 wdog_timeout = 1;
+    #100 wdog_timeout = 0;
+
+    send_command(RESET);
+    send_command(ICE_GOOD_FORCE);
 
     #10 n_atx_on = 1;
     #1000 $finish;
@@ -246,7 +256,6 @@ module test;
   always @(posedge n_ice_reset) begin
     $display("Configuring iCE");
     #400 ice_cdone = 1;
-    #500 wdog_timeout = 1;
   end
 
   always @(posedge wdog_timeout) begin

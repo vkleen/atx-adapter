@@ -26,8 +26,6 @@ import Data.Generics.Labels
 import Data.Monoid
 import Data.Foldable
 
-import Debug.Trace
-
 import qualified Data.List as LL
 
 data ExternalSignal = ExternalSignal { name :: Text
@@ -49,7 +47,6 @@ data Net = Net { name :: Text, bits :: [Integer] }
 parseCell :: Value -> Maybe Cell
 parseCell x = do
   t <- x ^? key "type" . _String
-  -- traceShow t (Just ())
   case t of
     "GP_4LUT" -> do
       config <- x ^? key "parameters" . key "INIT" . _String
@@ -206,6 +203,9 @@ main = do
                 L.iconcatMapOf (key "modules" . key "atx_control" . key "ports" . members)
                                (\n x -> [ ExternalSignal n (x ^?! key "bits" . nth 0 . _Integral) ])
                                yosysOutput
+  for_ ports $ \p ->
+    printf (s%" = "%net nets ports%"\n") (p ^. #name) (p ^. #number)
+  echo ""
 
   for_ cells $ \c ->
     maybe (pure ()) (echo . unsafeTextToLine) $ formatCell nets ports c

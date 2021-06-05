@@ -1,7 +1,7 @@
 read -sv2012 atx-control.v
 
 synth_greenpak4 -top atx_control -run :map_luts
-nlutmap -assert -luts 2,8,14,2 # disable 4LUTs
+nlutmap -assert -luts 2,8,14,2 # disable 2 3LUTs for manually placed logic
 clean
 synth_greenpak4 -top next_state -run map_cells:
 

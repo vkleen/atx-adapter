@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<GPDProject version="10" oldestCompatibleVersion="9" GPDVersion="6.25.004" lastChange="6/4/21 4:23 PM">
+<GPDProject version="10" oldestCompatibleVersion="9" GPDVersion="6.25.004" lastChange="6/5/21 12:10 AM">
     <generalProjectSettings/>
     <chip family="04" type="04" friendlyName="GreenPAK 4" partNumber="19" package="6">
-        <nvmData registerLenght="2048">0 0 0 0 0 0 E2 18 2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 14 3F 0 0 0 0 0 BF EF FB 0 0 0 0 0 0 0 6 0 C0 17 62 5D C 0 0 0 0 0 0 80 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 B0 2 0 0 0 0 0 0 0 0 0 0 4 0 80 0 10 0 0 8 9 36 1 0 73 F6 C0 8C D 6 80 1 74 0 3 0 0 5A 0 0 0 0 0 0 0 0 E0 B6 9 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 F0 3 3F 0 0 0 D 0 80 61 2 0 F0 3 0 0 0 0 0 0 0 0 0 0 0 0 10 80 E4 2 0 0 0 0 0 0 0 0 0 8 0 0 2 0 40 0 0 80 0 0 F0 1F 66 0 10 0 4 0 1 80 0 0 2 28 0 3 C3 0 0 31 20 8 A8 3C 82 7 C0 0 A5</nvmData>
-        <checksum crc32="0x54525DB6" version="1"/>
+        <nvmData registerLenght="2048">0 0 0 0 0 0 E2 18 2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 14 3F 0 0 0 0 0 BF EF FB 0 0 0 0 0 0 0 6 0 C0 17 62 5D C 0 0 0 0 0 0 80 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 B0 2 0 0 0 0 0 0 0 0 0 0 4 0 80 0 10 0 0 8 9 36 1 0 73 F6 C0 8C D 6 80 1 74 0 3 0 0 5A 0 0 0 0 0 0 0 0 E0 B6 9 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 FC 0 F0 3 3F 0 0 0 D 0 80 61 2 0 F0 3 0 0 0 0 0 0 0 0 0 0 0 0 10 80 E4 2 0 0 0 0 0 0 0 0 0 8 0 0 2 0 40 0 0 80 0 0 F0 1F 66 0 10 0 4 0 1 80 0 0 2 28 0 33 C0 0 0 31 20 8 A8 3C 82 7 C0 0 A5</nvmData>
+        <checksum crc32="0x7D4EAE59" version="1"/>
         <VDDItem id="0">
             <item id="0" caption="VDD (PIN 1)">
                 <graphics pos="(-330.00,-470.00)" angle="0" flipping="0" hidden="0" tOrigin="(20.00,10.00)"/>
@@ -88,14 +88,14 @@
         </IOPad>
         <IOPad id="15" useCaseMode="1">
             <item id="15" caption="PIN 15">
-                <graphics pos="(-425.00,-308.00)" angle="0" flipping="1" hidden="0" tOrigin="(20.00,10.00)"/>
+                <graphics pos="(-423.00,-251.00)" angle="0" flipping="1" hidden="0" tOrigin="(20.00,10.00)"/>
                 <textLabel sceneNum="1" pos="(3.29,-27.00)" angle="0.00" textColor="#ffff00ff" backgroundColor="#14141464">SCLK</textLabel>
             </item>
         </IOPad>
-        <IOPad id="16" useCaseMode="1">
+        <IOPad id="16" useCaseMode="2">
             <item id="16" caption="PIN 16">
                 <graphics pos="(-425.00,-378.00)" angle="0" flipping="1" hidden="0" tOrigin="(20.00,10.00)"/>
-                <textLabel sceneNum="1" pos="(7.52,-27.00)" angle="0.00" textColor="#ffff00ff" backgroundColor="#14141464">SDI</textLabel>
+                <textLabel sceneNum="1" pos="(5.06,-27.00)" angle="0.00" textColor="#ffff00ff" backgroundColor="#14141464">SDO</textLabel>
             </item>
         </IOPad>
         <item id="17" caption="GND (PIN 11)">
@@ -104,7 +104,7 @@
         <IOPad id="18" useCaseMode="1">
             <item id="18" caption="PIN 17">
                 <graphics pos="(-425.00,-448.00)" angle="0" flipping="1" hidden="0" tOrigin="(20.00,10.00)"/>
-                <textLabel sceneNum="1" pos="(5.47,-27.00)" angle="0.00" textColor="#ffff00ff" backgroundColor="#14141464">~SS</textLabel>
+                <textLabel sceneNum="1" pos="(7.52,-27.00)" angle="0.00" textColor="#ffff00ff" backgroundColor="#14141464">SDI</textLabel>
             </item>
         </IOPad>
         <IOPad id="19" useCaseMode="2">
@@ -651,6 +651,9 @@
         </wire>
         <wire output="115" input="245" autoRouting="1" pen="#ff8000ff;1.00;1;32;128" protected="1" CWLid="38" wireText="NET38" wireState="0">
             <points>(477.00,220.00); (-506.00,220.00); (-506.00,107.00); (-513.00,107.00); (-513.00,60.00); (-507.00,60.00)</points>
+        </wire>
+        <wire output="1" input="28" autoRouting="1" pen="#00ff00ff;1.00;1;32;128" protected="0" CWLid="-1" wireText="VDD" wireState="1">
+            <points/>
         </wire>
     </chip>
     <emulatorConfiguration version="1">
