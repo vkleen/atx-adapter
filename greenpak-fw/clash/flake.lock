@@ -1,0 +1,45 @@
+{
+  "nodes": {
+    "clash-compiler": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1622818988,
+        "narHash": "sha256-LlBUOarN56Grb1Uk+7zbuvaQkLgQbBIuGupLv/EhepI=",
+        "owner": "clash-lang",
+        "repo": "clash-compiler",
+        "rev": "aaf15590d74b9477cfca96c0ab40e27e1b678ab3",
+        "type": "github"
+      },
+      "original": {
+        "owner": "clash-lang",
+        "ref": "master",
+        "repo": "clash-compiler",
+        "type": "github"
+      }
+    },
+    "nixpkgs": {
+      "locked": {
+        "lastModified": 1621944132,
+        "narHash": "sha256-UJukvm7vSdGZv3yCY+eVzzNFt13/U2r3hJriE9QOICg=",
+        "owner": "vkleen",
+        "repo": "nixpkgs",
+        "rev": "92063174f7ec354d30155340705a6edf1b8e61c8",
+        "type": "github"
+      },
+      "original": {
+        "owner": "vkleen",
+        "ref": "local",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "root": {
+      "inputs": {
+        "clash-compiler": "clash-compiler",
+        "nixpkgs": "nixpkgs"
+      }
+    }
+  },
+  "root": "root",
+  "version": 7
+}

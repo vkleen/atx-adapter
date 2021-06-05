@@ -1,0 +1,40 @@
+default-extensions:
+  - BangPatterns
+  - BinaryLiterals
+  - ConstraintKinds
+  - DataKinds
+  - DefaultSignatures
+  - DeriveAnyClass
+  - DeriveDataTypeable
+  - DeriveFoldable
+  - DeriveFunctor
+  - DeriveGeneric
+  - DeriveLift
+  - DeriveTraversable
+  - DerivingStrategies
+  - InstanceSigs
+  - KindSignatures
+  - LambdaCase
+  - NoStarIsType
+  - PolyKinds
+  - RankNTypes
+  - ScopedTypeVariables
+  - StandaloneDeriving
+  - TupleSections
+  - TypeApplications
+  - TypeFamilies
+  - TypeOperators
+  - ViewPatterns
+  - TemplateHaskell
+  - QuasiQuotes
+  - NoImplicitPrelude
+
+ghc-options:
+    - -Wall
+    - -Wcompat
+    - -haddock
+    - -fplugin GHC.TypeLits.Extra.Solver
+    - -fplugin GHC.TypeLits.Normalise
+    - -fplugin GHC.TypeLits.KnownNat.Solver
+    - -fexpose-all-unfoldings
+    - -fno-worker-wrapper

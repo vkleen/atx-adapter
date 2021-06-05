@@ -1,0 +1,70 @@
+name: atx-gp
+version: 0.0.0
+description: Greenpak Gateware for an ATX power supply adapter/FPGA devboard
+maintainer: Viktor Kleen <viktor@kleen.org>
+
+defaults:
+  local: defaults.yaml
+
+build-type: Custom
+custom-setup:
+  dependencies:
+    - base
+    - Cabal
+    - cabal-doctest
+
+dependencies:
+  - base
+  - Cabal
+
+  - clash-prelude
+  - ghc-typelits-natnormalise
+  - ghc-typelits-extra
+  - ghc-typelits-knownnat
+
+library:
+  source-dirs: src
+  exposed-modules:
+    - Example.Project
+
+executables:
+  clash:
+    main: bin/Clash.hs
+    dependencies:
+      - base
+      - clash-ghc
+      - atx-gp
+  clashi:
+    main: bin/Clashi.hs
+    dependencies:
+      - base
+      - clash-ghc
+      - atx-gp
+
+tests:
+  doctests:
+    main: doctests.hs
+    source-dirs: tests
+    generated-other-modules:
+      - Build_doctests
+    verbatim:
+      type: exitcode-stdio-1.0
+      other-modules: null
+    dependencies:
+      - base
+      - atx-gp
+      - process
+      - doctest
+
+  test-library:
+    main: unittests.hs
+    source-dirs: tests
+    verbatim:
+      type: exitcode-stdio-1.0
+    dependencies:
+      - atx-gp
+      - QuickCheck
+      - hedgehog
+      - tasty
+      - tasty-hedgehog
+      - tasty-th

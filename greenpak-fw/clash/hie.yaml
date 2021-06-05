@@ -1,0 +1,23 @@
+cradle:
+  multi:
+    - path: "./Setup.hs"
+      config:
+        cradle:
+          none:
+    - path: "./"
+      config:
+        cradle:
+          cabal:
+            - path: "./src"
+              component: "simple-nix:lib:simple-nix"
+            - path: "./bin/Clash.hs"
+              component: "simple-nix:exe:clash"
+            - path: "./bin/Clashi.hs"
+              component: "simple-nix:exe:clashi"
+            - path: "./tests/doctests.hs"
+              component: "simple-nix:test:doctests"
+            - path: "./tests"
+              component: "simple-nix:test:test-library"
+
+# dependencies:
+#   - package.yaml
