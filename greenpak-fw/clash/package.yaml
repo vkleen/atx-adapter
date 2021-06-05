@@ -6,13 +6,6 @@ maintainer: Viktor Kleen <viktor@kleen.org>
 defaults:
   local: defaults.yaml
 
-build-type: Custom
-custom-setup:
-  dependencies:
-    - base
-    - Cabal
-    - cabal-doctest
-
 dependencies:
   - base
   - Cabal
@@ -42,22 +35,8 @@ executables:
       - atx-gp
 
 tests:
-  doctests:
-    main: doctests.hs
-    source-dirs: tests
-    generated-other-modules:
-      - Build_doctests
-    verbatim:
-      type: exitcode-stdio-1.0
-      other-modules: null
-    dependencies:
-      - base
-      - atx-gp
-      - process
-      - doctest
-
-  test-library:
-    main: unittests.hs
+  unit-tests:
+    main: unit-tests.hs
     source-dirs: tests
     verbatim:
       type: exitcode-stdio-1.0

@@ -1,2 +1,2 @@
 packages:
-  simple-nix.cabal
+  ./*.cabal
