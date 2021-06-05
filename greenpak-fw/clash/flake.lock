@@ -17,6 +17,23 @@
         "type": "github"
       }
     },
+    "clash-shake": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1615426181,
+        "narHash": "sha256-Nxf2a7KzhnFFfBO24G4gGaQDTz9bD6XtIlQruqprDNg=",
+        "owner": "gergoerdi",
+        "repo": "clash-shake",
+        "rev": "ed20d982c034a285f18403b76eb9d511524649fb",
+        "type": "github"
+      },
+      "original": {
+        "owner": "gergoerdi",
+        "ref": "master",
+        "repo": "clash-shake",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1621944132,
@@ -36,6 +53,7 @@
     "root": {
       "inputs": {
         "clash-compiler": "clash-compiler",
+        "clash-shake": "clash-shake",
         "nixpkgs": "nixpkgs"
       }
     }

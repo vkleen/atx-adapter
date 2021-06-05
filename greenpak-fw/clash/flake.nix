@@ -14,6 +14,14 @@
       ref = "master";
       flake = false;
     };
+
+    clash-shake = {
+      type = "github";
+      owner = "gergoerdi";
+      repo = "clash-shake";
+      ref = "master";
+      flake = false;
+    };
   };
 
   description = "Greenpak Gateware for an ATX power supply adapter/FPGA devboard";
@@ -32,6 +40,7 @@
               clash-ghc = hfinal.callCabal2nix "clash-ghc" "${inputs.clash-compiler}/clash-ghc" {};
               clash-prelude = hfinal.callCabal2nix "clash-prelude" "${inputs.clash-compiler}/clash-prelude" {};
               clash-cores = hfinal.callCabal2nix "clash-cores" "${inputs.clash-compiler}/clash-cores" {};
+              clash-shake = hfinal.callCabal2nix "clash-shake" "${inputs.clash-shake}" {};
             });
           };
         })

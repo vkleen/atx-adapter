@@ -19,6 +19,8 @@ library:
   source-dirs: src
   exposed-modules:
     - Example.Project
+  dependencies:
+    - template-haskell
 
 executables:
   clash:
@@ -33,6 +35,15 @@ executables:
       - base
       - clash-ghc
       - atx-gp
+
+  shake:
+    source-dirs: shake
+    main: Main.hs
+    dependencies:
+      - base
+      - shake
+      - clash-ghc
+      - clash-shake
 
 tests:
   unit-tests:

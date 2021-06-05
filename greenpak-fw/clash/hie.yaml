@@ -6,6 +6,8 @@ cradle:
       component: "atx-gp:exe:clash"
     - path: "./bin/Clashi.hs"
       component: "atx-gp:exe:clashi"
+    - path: "./shake/Main.hs"
+      component: "atx-gp:exe:shake"
     - path: "./tests"
       component: "atx-gp:test:unit-tests"
 
