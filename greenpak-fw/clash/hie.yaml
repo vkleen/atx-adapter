@@ -19,5 +19,5 @@ cradle:
             - path: "./tests"
               component: "simple-nix:test:test-library"
 
-# dependencies:
-#   - package.yaml
+dependencies:
+  - package.yaml

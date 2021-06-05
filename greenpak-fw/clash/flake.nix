@@ -53,6 +53,7 @@
         packages = [
           (p.haskell-language-server.override { supportedGhcVersions = [ ghcVersion ]; })
           p.haskell.packages."ghc${ghcVersion}".cabal-install
+          p.hpack
         ];
         inputsFrom = [ self.packages."${s}".atx-gp.env ];
       };
