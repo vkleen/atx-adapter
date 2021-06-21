@@ -67,7 +67,7 @@ pass g = do
               argsNormal = snd . normaliseType famInstEnvs Nominal <$> args
               retNormal = snd $ normaliseType famInstEnvs Nominal ret
 
-              topEntity = traceShowId $
+              topEntity =
                 mkSynthesize b (mkPortProduct tcolonTyCon <$> argsNormal)
                                (mkPortProduct tcolonTyCon retNormal)
           Just Annotation { ann_target = NamedTarget n
