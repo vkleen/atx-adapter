@@ -46,24 +46,24 @@ instance (GToClashTuple f, GToClashTuple g) => GToClashTuple (f :*: g) where
   gtoClashTuple (a :*: b) = (gtoClashTuple a, gtoClashTuple b)
   gfromClashTuple (a, b) = gfromClashTuple a :*: gfromClashTuple b
 
-class ToClashTuple (f :: Domain -> Type) where
-  type ClashTuple f (dom :: Domain) :: Type
-  toClashTuple :: forall (dom :: Domain). f dom -> ClashTuple f dom
-  fromClashTuple :: forall (dom :: Domain). ClashTuple f dom -> f dom
+class ToClashTuple (f :: k -> Type) where
+  type ClashTuple f (x :: k) :: Type
+  toClashTuple :: forall (x :: k). f x -> ClashTuple f x
+  fromClashTuple :: forall (x :: k). ClashTuple f x -> f x
 
-  default toClashTuple :: forall (dom :: Domain) .
+  default toClashTuple :: forall (x :: k) .
                         ( GenericK f
                         , GToClashTuple (RepK f)
-                        , ClashTuple f dom ~ GClashTuple (RepK f) (dom :&&: LoT0)
+                        , ClashTuple f x ~ GClashTuple (RepK f) (x :&&: LoT0)
                         )
-                       => f dom -> ClashTuple f dom
-  toClashTuple = gtoClashTuple . fromK @_ @f @(dom :&&: LoT0)
+                       => f x -> ClashTuple f x
+  toClashTuple = gtoClashTuple . fromK @_ @f @(x :&&: LoT0)
 
-  default fromClashTuple :: forall (dom :: Domain) .
+  default fromClashTuple :: forall (x :: k) .
                           ( GenericK f
                           , GToClashTuple (RepK f)
-                          , ClashTuple f dom ~ GClashTuple (RepK f) (dom :&&: LoT0)
+                          , ClashTuple f x ~ GClashTuple (RepK f) (x :&&: LoT0)
                           )
-                         => ClashTuple f dom -> f dom
-  fromClashTuple = toK @_ @f @(dom :&&: LoT0) . gfromClashTuple
+                         => ClashTuple f x -> f x
+  fromClashTuple = toK @_ @f @(x :&&: LoT0) . gfromClashTuple
 

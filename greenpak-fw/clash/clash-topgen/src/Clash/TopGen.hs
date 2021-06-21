@@ -13,8 +13,6 @@ import GhcPlugins
 import FamInstEnv
 import NameCache
 
-import Debug.Trace
-
 plugin :: Plugin
 plugin = defaultPlugin { installCoreToDos = install
                        }

@@ -23,9 +23,9 @@ main = shakeArgs shakeOptions{ shakeFiles = outDir } do
 
   ClashKit{..} <- clashRules (outDir </> "clash") Verilog
     [ "src" ]
-    "ATX"
+    "Top"
     [ ] $
     pure ()
 
-  phony "verilog" $ need [outDir </> "clash" </> "ATX.topEntity" </> "clash-manifest.json"]
+  phony "verilog" $ need [outDir </> "clash" </> "Top.topEntity" </> "clash-manifest.json"]
   phony "clashi" $ clash ["--interactive", "src/ATX.hs"]
