@@ -1,2 +1,3 @@
 packages:
   ./*.cabal
+  clash-topgen/*.cabal

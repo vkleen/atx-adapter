@@ -17,31 +17,33 @@ dependencies:
 
 library:
   source-dirs: src
-  exposed-modules:
-    - Example.Project
   dependencies:
     - template-haskell
+    - clash-topgen
+    - kind-generics
+    - kind-generics-th
+
+  ghc-options:
+      - -Wall
+      - -Wcompat
+      - -haddock
+      - -fplugin GHC.TypeLits.Extra.Solver
+      - -fplugin GHC.TypeLits.Normalise
+      - -fplugin GHC.TypeLits.KnownNat.Solver
+      - -fexpose-all-unfoldings
+      - -fno-worker-wrapper
 
 executables:
-  clash:
-    main: bin/Clash.hs
-    dependencies:
-      - base
-      - clash-ghc
-      - atx-gp
-  clashi:
-    main: bin/Clashi.hs
-    dependencies:
-      - base
-      - clash-ghc
-      - atx-gp
-
   shake:
     source-dirs: shake
     main: Main.hs
+    when:
+      - condition: false
+        dependencies: atx-gp
     dependencies:
       - base
       - shake
+      - clash-topgen
       - clash-ghc
       - clash-shake
 

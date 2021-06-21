@@ -14,14 +14,6 @@
       ref = "master";
       flake = false;
     };
-
-    clash-shake = {
-      type = "github";
-      owner = "gergoerdi";
-      repo = "clash-shake";
-      ref = "master";
-      flake = false;
-    };
   };
 
   description = "Greenpak Gateware for an ATX power supply adapter/FPGA devboard";
@@ -34,14 +26,26 @@
       overlays = system: [
         (final: prev: {
           haskell = prev.haskell // {
-            packageOverrides = (hfinal: hprev: lib.mapAttrs (_: p: final.haskell.lib.disableLibraryProfiling p)
+            packageOverrides = hfinal: hprev: lib.mapAttrs (_: p: final.haskell.lib.disableLibraryProfiling p)
             {
               clash-lib = hfinal.callCabal2nix "clash-lib" "${inputs.clash-compiler}/clash-lib" {};
               clash-ghc = hfinal.callCabal2nix "clash-ghc" "${inputs.clash-compiler}/clash-ghc" {};
               clash-prelude = hfinal.callCabal2nix "clash-prelude" "${inputs.clash-compiler}/clash-prelude" {};
               clash-cores = hfinal.callCabal2nix "clash-cores" "${inputs.clash-compiler}/clash-cores" {};
-              clash-shake = hfinal.callCabal2nix "clash-shake" "${inputs.clash-shake}" {};
-            });
+              clash-shake = hfinal.callCabal2nix "clash-shake" "${self}/greenpak-fw/nih/clash-shake" {};
+
+              clash-topgen =  hfinal.callCabal2nix "clash-topgen" "${self}/greenpak-fw/clash/clash-topgen" {};
+            };
+          };
+        })
+        (final: prev: {
+          haskell = prev.haskell // {
+            packages = prev.haskell.packages // {
+              ghc901 = prev.haskell.packages.ghc901.extend (hfinal: hprev: {
+                jailbreak-cabal = hprev.jailbreak-cabal.override { mkDerivation = hprev.mkDerivation; };
+                mkDerivation = drv: hprev.mkDerivation (drv // { jailbreak = true; doHaddock = false; });
+              });
+            };
           };
         })
       ];
@@ -64,12 +68,12 @@
           p.haskell.packages."ghc${ghcVersion}".cabal-install
           p.hpack
         ];
-        inputsFrom = [ self.packages."${s}".atx-gp.env ];
+        inputsFrom = [ self.legacyPackages."${s}".atx-gp.env ];
       };
     in {
-      packages = forAllSystems pkg;
+      legacyPackages = forAllSystems pkg;
       devShell = forAllSystems shell;
 
-      defaultPackage = forAllSystems (s: _: self.packages."${s}".atx-gp);
+      defaultPackage = forAllSystems (s: _: self.legacyPackages."${s}".atx-gp);
   };
 }

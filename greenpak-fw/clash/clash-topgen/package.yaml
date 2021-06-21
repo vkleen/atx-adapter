@@ -1,0 +1,21 @@
+name: clash-topgen
+version: 0.0.0
+description: GHC Plugin to generate TopEntity annotations for clash
+maintainer: Viktor Kleen <viktor@kleen.org>
+
+defaults:
+  local: defaults.yaml
+
+library:
+  source-dirs: src
+  dependencies:
+    - base
+    - Cabal
+
+    - clash-prelude
+    - ghc
+
+  ghc-options:
+      - -Wall
+      - -Wcompat
+      - -haddock
