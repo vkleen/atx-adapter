@@ -2,9 +2,9 @@
   inputs = {
     nixpkgs = {
       type = "github";
-      owner = "vkleen";
+      owner = "nixos";
       repo = "nixpkgs";
-      ref = "local";
+      ref = "master";
     };
 
     clash-compiler = {
@@ -13,6 +13,15 @@
       repo = "clash-compiler";
       ref = "master";
       flake = false;
+    };
+
+    flake-utils.url = "github:numtide/flake-utils";
+    haskell-language-server = {
+      type = "github";
+      owner = "haskell";
+      repo = "haskell-language-server";
+      ref = "master";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
@@ -32,19 +41,9 @@
               clash-ghc = hfinal.callCabal2nix "clash-ghc" "${inputs.clash-compiler}/clash-ghc" {};
               clash-prelude = hfinal.callCabal2nix "clash-prelude" "${inputs.clash-compiler}/clash-prelude" {};
               clash-cores = hfinal.callCabal2nix "clash-cores" "${inputs.clash-compiler}/clash-cores" {};
-              clash-shake = hfinal.callCabal2nix "clash-shake" "${self}/greenpak-fw/nih/clash-shake" {};
+              # clash-shake = hfinal.callCabal2nix "clash-shake" "${self}/greenpak-fw/nih/clash-shake" {};
 
               clash-topgen =  hfinal.callCabal2nix "clash-topgen" "${self}/greenpak-fw/clash/clash-topgen" {};
-            };
-          };
-        })
-        (final: prev: {
-          haskell = prev.haskell // {
-            packages = prev.haskell.packages // {
-              ghc901 = prev.haskell.packages.ghc901.extend (hfinal: hprev: {
-                jailbreak-cabal = hprev.jailbreak-cabal.override { mkDerivation = hprev.mkDerivation; };
-                mkDerivation = drv: hprev.mkDerivation (drv // { jailbreak = true; doHaddock = false; });
-              });
             };
           };
         })
@@ -64,9 +63,12 @@
 
       shell = s: p: p.mkShell {
         packages = [
-          (p.haskell-language-server.override { supportedGhcVersions = [ ghcVersion ]; })
+         inputs.haskell-language-server.packages.${s}."haskell-language-server-${ghcVersion}"
           p.haskell.packages."ghc${ghcVersion}".cabal-install
+          p.haskell.packages."ghc${ghcVersion}".ghcid
           p.hpack
+          p.yosys p.xdot p.graphviz p.verilog
+          p.fsatrace
         ];
         inputsFrom = [ self.legacyPackages."${s}".atx-gp.env ];
       };

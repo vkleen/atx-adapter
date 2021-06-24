@@ -1,0 +1,4 @@
+:set -XBangPatterns -XBinaryLiterals -XConstraintKinds -XDataKinds -XDefaultSignatures -XDeriveAnyClass -XDeriveDataTypeable -XDeriveFoldable -XDeriveFunctor -XDeriveGeneric -XDeriveLift -XDeriveTraversable -XDerivingStrategies -XInstanceSigs -XKindSignatures -XLambdaCase -XNoStarIsType -XPolyKinds -XRankNTypes -XScopedTypeVariables -XStandaloneDeriving -XTupleSections -XTypeApplications -XTypeFamilies -XTypeOperators -XViewPatterns -XTemplateHaskell -XQuasiQuotes -XNoImplicitPrelude
+:set -fplugin GHC.TypeLits.Extra.Solver -fplugin GHC.TypeLits.Normalise -fplugin GHC.TypeLits.KnownNat.Solver -fexpose-all-unfoldings -fno-worker-wrapper
+:set -isrc:tests
+:load tests/unit-tests.hs

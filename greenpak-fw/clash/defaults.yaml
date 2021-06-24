@@ -28,5 +28,3 @@ default-extensions:
   - TemplateHaskell
   - QuasiQuotes
   - NoImplicitPrelude
-
-

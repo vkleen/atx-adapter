@@ -18,10 +18,12 @@ dependencies:
 library:
   source-dirs: src
   dependencies:
-    - template-haskell
     - clash-topgen
     - kind-generics
     - kind-generics-th
+    - mtl
+    - singletons <= 2.7
+    - template-haskell
 
   ghc-options:
       - -Wall
@@ -32,6 +34,7 @@ library:
       - -fplugin GHC.TypeLits.KnownNat.Solver
       - -fexpose-all-unfoldings
       - -fno-worker-wrapper
+      - -Wno-unticked-promoted-constructors
 
 executables:
   shake:
@@ -41,11 +44,26 @@ executables:
       - condition: false
         dependencies: atx-gp
     dependencies:
+      - aeson
       - base
-      - shake
-      - clash-topgen
+      - binary
+      - bytestring
       - clash-ghc
-      - clash-shake
+      - clash-lib
+      - clash-topgen
+      - deepseq
+      - directory
+      - formatting
+      - generic-lens
+      - hashable
+      - lens
+      - lens-aeson
+      - scientific
+      - shake
+      - split
+      - stache
+      - text
+      - unordered-containers
 
 tests:
   unit-tests:
@@ -53,10 +71,18 @@ tests:
     source-dirs: tests
     verbatim:
       type: exitcode-stdio-1.0
+    ghc-options:
+      - -fplugin GHC.TypeLits.Extra.Solver
+      - -fplugin GHC.TypeLits.Normalise
+      - -fplugin GHC.TypeLits.KnownNat.Solver
     dependencies:
+      - arrows
       - atx-gp
-      - QuickCheck
+      - clash-prelude
+      - generics-sop
       - hedgehog
+      - hedgehog-gen
+      - sop-core
       - tasty
       - tasty-hedgehog
       - tasty-th

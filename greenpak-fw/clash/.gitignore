@@ -2,3 +2,4 @@ result*
 dist-*
 *.cabal
 _build
+*.json

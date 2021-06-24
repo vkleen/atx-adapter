@@ -9,7 +9,7 @@ import Clash.Tuple
 import Types
 import ATX
 
-topEntity :: ClashTuple Input (Signal System)
-          -> ClashTuple Output (Signal System)
+topEntity :: ClashTuple Input System
+          -> ClashTuple Output System
 topEntity = toClashTuple . atxControl . fromClashTuple
 {-# ANN topEntity TopGen #-}

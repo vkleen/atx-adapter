@@ -1,31 +1,52 @@
 {-# language BlockArguments #-}
 {-# language RecordWildCards #-}
+{-# language OverloadedStrings #-}
 
 module Main where
 
 import Prelude
 
 import Clash.Shake
+import Greenpak
 
 import Development.Shake
 import Development.Shake.FilePath
 
+import qualified Data.Text.Lazy as TL
+import qualified Data.Text.Lazy.Builder as TLB
+
+import Control.Monad (forM_)
+
+import Formatting
+import Formatting.ShortFormatters
+
 outDir :: FilePath
 outDir = "_build"
 
-main :: IO ()
-main = shakeArgs shakeOptions{ shakeFiles = outDir } do
-  useConfig "build.mk"
+normalF :: Format (Action ()) a -> a
+normalF f = runFormat f (putNormal . TL.unpack . TLB.toLazyText)
 
+main :: IO ()
+main = shakeArgs shakeOptions{ shakeFiles = outDir, shakeLint = Just LintFSATrace } do
   phony "clean" do
-    putNormal $ "Cleaning files in " <> outDir
+    normalF ("Cleaning files in "%s%"\n") outDir
     removeFilesAfter outDir [ "//*" ]
 
-  ClashKit{..} <- clashRules (outDir </> "clash") Verilog
+  kit@ClashKit{..} <- clashRules @(TopEntityLoc "Top" "topEntity")
+    (outDir </> "clash") Verilog
     [ "src" ]
-    "Top"
     [ ] $
     pure ()
 
-  phony "verilog" $ need [outDir </> "clash" </> "Top.topEntity" </> "clash-manifest.json"]
-  phony "clashi" $ clash ["--interactive", "src/ATX.hs"]
+  netlist <- greenpakCircuit kit outDir "atx-adapter"
+  phony "greenpak/netlist" $ do
+    need [netlist]
+    normalF ("Produced GreenPak netlist at "%s%"\n") netlist
+
+  phony "greenpak/print-netlist" $ do
+    need [netlist]
+    putNormal =<< liftIO (readFile netlist)
+
+  phony "verilog" $ do
+    need [manifestFile]
+    normalF ("Produced Clash manifest at "%s%"\n") manifestFile
